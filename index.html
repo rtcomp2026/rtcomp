@@ -1,32 +1,186 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Agent</title>
-    <link rel="stylesheet" href="style.css">
-</head>
+Last login: Sun Aug  9 23:19:55 on ttys003
+bash
+chizhang@ ~ % bash
 
+The default interactive shell is now zsh.
+To update your account to use zsh, please run `chsh -s /bin/zsh`.
+For more details, please visit https://support.apple.com/kb/HT208050.
+[chizhang ~]$ cd Downloads/AI\ Agent
+[chizhang AI Agent]$ l
+bash: l: command not found
+[chizhang AI Agent]$ ls
+app.js     index.html modules    style.css
+[chizhang AI Agent]$ vi app.js 
+[chizhang AI Agent]$ vi index.html 
+[chizhang AI Agent]$ ls
+app.js     index.html modules    style.css
+[chizhang AI Agent]$ cd modules/
+[chizhang modules]$ ls
+chat.js      documents.js reminders.js
+[chizhang modules]$ vi documents.js 
+[chizhang modules]$ ls
+chat.js      documents.js reminders.js
+[chizhang modules]$ cd ..
+[chizhang AI Agent]$ ls
+app.js     index.html modules    style.css
+[chizhang AI Agent]$ python3 -m http.server 8000
+Serving HTTP on :: port 8000 (http://[::]:8000/) ...
+::1 - - [10/Aug/2026 10:49:09] "GET / HTTP/1.1" 200 -
+::1 - - [10/Aug/2026 10:49:09] "GET /style.css HTTP/1.1" 200 -
+::1 - - [10/Aug/2026 10:49:09] "GET /modules/chat.js HTTP/1.1" 200 -
+::1 - - [10/Aug/2026 10:49:09] "GET /modules/documents.js HTTP/1.1" 200 -
+::1 - - [10/Aug/2026 10:49:09] "GET /app.js HTTP/1.1" 200 -
+::1 - - [10/Aug/2026 10:49:09] "GET /modules/reminders.js HTTP/1.1" 200 -
+::1 - - [10/Aug/2026 10:49:09] code 404, message File not found
+::1 - - [10/Aug/2026 10:49:09] "GET /favicon.ico HTTP/1.1" 404 -
+::1 - - [10/Aug/2026 11:03:02] "GET / HTTP/1.1" 304 -
+::1 - - [10/Aug/2026 11:03:02] "GET /modules/documents.js HTTP/1.1" 200 -
+::1 - - [10/Aug/2026 11:03:02] "GET /style.css HTTP/1.1" 304 -
+::1 - - [10/Aug/2026 11:03:02] "GET /modules/chat.js HTTP/1.1" 200 -
+::1 - - [10/Aug/2026 11:03:02] "GET /modules/reminders.js HTTP/1.1" 200 -
+::1 - - [10/Aug/2026 11:03:02] "GET /app.js HTTP/1.1" 304 -
+^C
+Keyboard interrupt received, exiting.
+[chizhang AI Agent]$ vi index.html 
+[chizhang AI Agent]$ ls
+app.js     index.html modules    style.css
+[chizhang AI Agent]$ python3 -m http.server 8000
+Serving HTTP on :: port 8000 (http://[::]:8000/) ...
+::1 - - [10/Aug/2026 11:04:44] "GET /modules/documents.js HTTP/1.1" 304 -
+::1 - - [10/Aug/2026 11:04:44] "GET /modules/reminders.js HTTP/1.1" 304 -
+::1 - - [10/Aug/2026 11:04:44] "GET /modules/chat.js HTTP/1.1" 304 -
+^X^C
+Keyboard interrupt received, exiting.
+[chizhang AI Agent]$ ls
+app.js     index.html modules    style.css
+[chizhang AI Agent]$ vi index.html 
+[chizhang AI Agent]$ python3 -m http.server 8000
+Serving HTTP on :: port 8000 (http://[::]:8000/) ...
+::1 - - [10/Aug/2026 11:24:43] "GET / HTTP/1.1" 200 -
+::1 - - [10/Aug/2026 11:24:43] "GET /style.css HTTP/1.1" 304 -
+::1 - - [10/Aug/2026 11:24:43] "GET /app.js HTTP/1.1" 304 -
+::1 - - [10/Aug/2026 11:24:43] "GET /modules/chat.js HTTP/1.1" 200 -
+::1 - - [10/Aug/2026 11:24:43] "GET /modules/reminders.js HTTP/1.1" 304 -
+::1 - - [10/Aug/2026 11:24:43] "GET /modules/documents.js HTTP/1.1" 304 -
+::1 - - [10/Aug/2026 11:28:03] "GET / HTTP/1.1" 304 -
+::1 - - [10/Aug/2026 11:28:03] "GET /modules/chat.js HTTP/1.1" 200 -
+^C
+Keyboard interrupt received, exiting.
+[chizhang AI Agent]$ ls
+app.js     index.html modules    style.css
+[chizhang AI Agent]$ vi index.html 
+[chizhang AI Agent]$ vi style.css 
+[chizhang AI Agent]$ vi style.css 
+[chizhang AI Agent]$ vi index.html 
+[chizhang AI Agent]$ python3 -m http.server 8000
+Serving HTTP on :: port 8000 (http://[::]:8000/) ...
+::1 - - [11/Aug/2026 17:22:39] "GET / HTTP/1.1" 200 -
+::1 - - [11/Aug/2026 17:22:39] "GET /app.js HTTP/1.1" 200 -
+::1 - - [11/Aug/2026 17:22:39] "GET /style.css HTTP/1.1" 200 -
+::1 - - [11/Aug/2026 17:22:39] "GET /modules/documents.js HTTP/1.1" 304 -
+::1 - - [11/Aug/2026 17:22:39] "GET /modules/reminders.js HTTP/1.1" 304 -
+::1 - - [11/Aug/2026 17:22:39] "GET /modules/chat.js HTTP/1.1" 304 -
+^C
+Keyboard interrupt received, exiting.
+[chizhang AI Agent]$ ls
+app.js     index.html modules    style.css
+[chizhang AI Agent]$ modules/
+bash: modules/: is a directory
+[chizhang AI Agent]$ cd modules/
+[chizhang modules]$ ls
+chat.js      documents.js reminders.js
+[chizhang modules]$ vi documents.js 
+[chizhang modules]$ cd ..
+[chizhang AI Agent]$ vi app.js 
+[chizhang AI Agent]$ vi style.css 
+[chizhang AI Agent]$ vi index.html 
+[chizhang AI Agent]$ vi style.css 
+[chizhang AI Agent]$ vi style.css 
+[chizhang AI Agent]$ vi index.html 
+[chizhang AI Agent]$ vi style.css 
+[chizhang AI Agent]$ vi index.html 
+[chizhang AI Agent]$ vi style.css 
+[chizhang AI Agent]$ vi index.html 
+[chizhang AI Agent]$ vi style.css 
+[chizhang AI Agent]$ vi index.html 
+[chizhang AI Agent]$ vi style.css 
+[chizhang AI Agent]$ vi index.html 
+[chizhang AI Agent]$ python3 -m http.server 8000
+Serving HTTP on :: port 8000 (http://[::]:8000/) ...
+::1 - - [11/Aug/2026 20:56:15] "GET / HTTP/1.1" 200 -
+::1 - - [11/Aug/2026 20:56:15] "GET /style.css HTTP/1.1" 200 -
+::1 - - [11/Aug/2026 20:56:15] "GET /app.js HTTP/1.1" 200 -
+::1 - - [11/Aug/2026 20:56:15] "GET /modules/documents.js HTTP/1.1" 304 -
+::1 - - [11/Aug/2026 20:56:15] "GET /modules/reminders.js HTTP/1.1" 304 -
+::1 - - [11/Aug/2026 20:56:15] "GET /modules/chat.js HTTP/1.1" 304 -
+::1 - - [11/Aug/2026 21:10:25] "GET / HTTP/1.1" 200 -
+::1 - - [11/Aug/2026 21:13:54] "GET / HTTP/1.1" 200 -
+::1 - - [11/Aug/2026 21:14:46] "GET / HTTP/1.1" 200 -
+::1 - - [11/Aug/2026 21:14:47] "GET / HTTP/1.1" 304 -
+::1 - - [11/Aug/2026 21:14:54] "GET / HTTP/1.1" 304 -
+^C
+Keyboard interrupt received, exiting.
+[chizhang AI Agent]$ python3 -m http.server 8000
+Serving HTTP on :: port 8000 (http://[::]:8000/) ...
+::1 - - [11/Aug/2026 21:15:15] "GET / HTTP/1.1" 304 -
+::1 - - [11/Aug/2026 21:15:16] "GET / HTTP/1.1" 304 -
+::1 - - [11/Aug/2026 21:15:23] "GET / HTTP/1.1" 304 -
+^C
+Keyboard interrupt received, exiting.
+[chizhang AI Agent]$ python3 -m http.server 8000
+Serving HTTP on :: port 8000 (http://[::]:8000/) ...
+::1 - - [11/Aug/2026 21:15:36] "GET / HTTP/1.1" 304 -
+^C
+Keyboard interrupt received, exiting.
+[chizhang AI Agent]$ ls
+app.js     index.html modules    style.css
+[chizhang AI Agent]$ vi index.html 
+
+<!DOCTYPE html>^M
+<html lang="en">^M
+<head>^M
+    <meta charset="UTF-8">^M
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">^M
+    <title>AI Agent</title>^M
+    <link rel="stylesheet" href="style.css">^M
+</head>^M
+^M
 <body>
-    <header>
-        <button id="manualBtn">📘 Manual</button>
-        <button id="personBtn">👤 Info</button>
-    </header>
-
-    <main>
-        <div id="chatWindow"></div>
-
-        <div id="chatInputArea">
-            <input id="chatInput" type="text" placeholder="Ask me anything">
-            <button id="sendBtn">Send</button>
+    <aside id="sidebar" class="sidebar" aria-hidden="true">
+        <div class="sidebarHeader">
+            <h2>Menu</h2>
+            <button id="closeMenuBtn" class="iconButton" aria-label="Close menu">✕</button>
         </div>
-    </main>
 
-    <footer>
-        <button id="newReminderBtn">➕ Reminder</button>
-        <button id="listReminderBtn">📅 All Reminders</button>
-    </footer>
+        <nav class="menuList" aria-label="Main menu">
+            <button id="newReminderBtn" class="menuItem">➕ New Reminder</button>
+            <button id="listReminderBtn" class="menuItem">📅 All Reminders</button>
+            <button id="personBtn" class="menuItem">👤 Info</button>
+        </nav>
+    </aside>
 
-    <script type="module" src="app.js"></script>
-</body>
-</html>
+    <div id="menuOverlay" class="menuOverlay" hidden></div>
+
+    <section
+        id="remindersPage"
+        class="remindersPage"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="remindersTitle"
+        hidden
+    >
+        <div class="pageHeader">
+            <h2 id="remindersTitle">All Reminders</h2>
+            <button id="closeRemindersBtn" class="iconButton" aria-label="Close reminders">✕</button>
+        </div>
+        <div id="remindersContent" class="remindersContent"></div>
+    </section>
+
+    <header>
+        <button
+            id="manualBtn"
+            class="iconButton"
+            aria-label="Open menu"
+            aria-controls="sidebar"
+            aria-expanded="false"
+                                                                                                                                    
