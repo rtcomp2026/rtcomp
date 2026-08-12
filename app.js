@@ -10,6 +10,8 @@ const remindersContent = document.getElementById("remindersContent");
 const infoPage = document.getElementById("infoPage");
 const profileForm = document.getElementById("profileForm");
 const profileSaveStatus = document.getElementById("profileSaveStatus");
+const diseaseForm = document.getElementById("diseaseForm");
+const diseaseSaveStatus = document.getElementById("diseaseSaveStatus");
 
 const PROFILE_STORAGE_KEY = "rtCompanionProfile";
 const EMPTY_PROFILE = {
@@ -20,7 +22,16 @@ const EMPTY_PROFILE = {
     address: "",
     emergencyContactName: "",
     emergencyContactPhone: "",
-    notes: ""
+    notes: "",
+    diseaseType: "",
+    diagnosisDate: "",
+    diseaseInfo: "",
+    riskGroup: "I don't know",
+    gradeGroup: "I don't know",
+    psaAtDiagnosis: "",
+    clinicalStage: "",
+    prostateRemoved: "I don't know",
+    treatmentInfo: ""
 };
 
 function loadProfile() {
@@ -99,9 +110,22 @@ function openRemindersPage() {
 
 function fillProfileForm(profile) {
     Object.entries(profile).forEach(([fieldName, value]) => {
-        const field = profileForm.elements.namedItem(fieldName);
-        if (field) field.value = value;
+        const fields = document.querySelectorAll(`[name="${fieldName}"]`);
+        fields.forEach(field => {
+            if (field.type === "radio") {
+                field.checked = field.value === value;
+            } else {
+                field.value = value;
+            }
+        });
     });
+}
+
+function collectProfileData() {
+    return {
+        ...Object.fromEntries(new FormData(profileForm)),
+        ...Object.fromEntries(new FormData(diseaseForm))
+    };
 }
 
 function updateGreeting(profile) {
@@ -119,6 +143,7 @@ function closeInfoPage() {
 function openInfoPage() {
     fillProfileForm(loadProfile());
     profileSaveStatus.textContent = "";
+    diseaseSaveStatus.textContent = "";
     setMenuOpen(false);
     infoPage.hidden = false;
     document.getElementById("closeInfoBtn").focus();
@@ -169,10 +194,17 @@ document.getElementById("personBtn").onclick = () => {
 
 profileForm.addEventListener("submit", event => {
     event.preventDefault();
-    const savedProfile = saveProfile(Object.fromEntries(new FormData(profileForm)));
+    const savedProfile = saveProfile(collectProfileData());
     fillProfileForm(savedProfile);
     updateGreeting(savedProfile);
     profileSaveStatus.textContent = "Information saved in this browser.";
+});
+
+diseaseForm.addEventListener("submit", event => {
+    event.preventDefault();
+    const savedProfile = saveProfile(collectProfileData());
+    fillProfileForm(savedProfile);
+    diseaseSaveStatus.textContent = "Disease information saved in this browser.";
 });
 
 updateGreeting(loadProfile());
