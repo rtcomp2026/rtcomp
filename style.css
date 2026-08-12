@@ -299,6 +299,28 @@ button:hover {
     background: white;
 }
 
+.diseaseForm {
+    margin-top: 18px;
+}
+
+.profileSectionHeading {
+    padding-bottom: 14px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.profileSectionHeading h3 {
+    margin: 0 0 5px;
+    color: #24443f;
+    font-size: 19px;
+}
+
+.profileSectionHeading p {
+    margin: 0;
+    color: #6b7280;
+    font-size: 13px;
+    line-height: 1.45;
+}
+
 .profileForm label {
     display: flex;
     flex-direction: column;
@@ -324,6 +346,45 @@ button:hover {
 
 .profileForm textarea {
     resize: vertical;
+}
+
+.choiceGroup {
+    margin: 0;
+    padding: 14px;
+    border: 1px solid #d9d9e3;
+    border-radius: 9px;
+}
+
+.choiceGroup legend {
+    padding: 0 6px;
+    color: #374151;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.choiceOptions {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 9px 14px;
+}
+
+.choiceOptions.compactChoices {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+}
+
+.choiceOptions label {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 7px;
+    color: #4b5563;
+    font-size: 14px;
+}
+
+.choiceOptions input[type="radio"] {
+    width: auto;
+    margin: 0;
+    accent-color: #0f766e;
 }
 
 .profileForm input:focus,
@@ -413,5 +474,976 @@ button:hover {
     .profileActions {
         align-items: stretch;
         flex-direction: column;
+    }
+
+    .choiceOptions,
+    .choiceOptions.compactChoices {
+        grid-template-columns: 1fr;
+    }
+}
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    color: #202123;
+    background: #f7f7f8;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    min-height: 64px;
+    padding: 0 18px;
+    background: #ffffff;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 20px;
+}
+
+main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    width: min(900px, calc(100% - 32px));
+    min-height: 0;
+    margin: 0 auto;
+    padding: 18px 0;
+    overflow-y: auto;
+}
+
+.todayDashboard {
+    margin-bottom: 18px;
+}
+
+.dashboardIntro {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 14px;
+    padding: 18px 20px;
+    border: 1px solid #cfe7df;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #eefbf7, #f6f8ff);
+}
+
+.dashboardEyebrow {
+    margin: 0 0 4px;
+    color: #0f766e;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.dashboardIntro h2 {
+    margin: 0;
+    font-size: 22px;
+}
+
+.greetingMessage {
+    max-width: 430px;
+    margin: 2px 0 0;
+    color: #3f4b5b;
+    line-height: 1.5;
+}
+
+.dashboardTable {
+    border: 1px solid #d9d9e3;
+    border-radius: 12px;
+    background: white;
+    box-shadow: 0 2px 8px rgb(0 0 0 / 4%);
+    overflow: hidden;
+}
+
+.dashboardRow {
+    display: grid;
+    grid-template-columns: minmax(190px, 28%) 1fr;
+    align-items: center;
+    min-height: 52px;
+}
+
+.dashboardRow + .dashboardRow {
+    border-top: 1px solid #e5e7eb;
+}
+
+.dashboardRow h3 {
+    align-self: stretch;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin: 0;
+    padding: 11px 14px;
+    border-right: 1px solid #e5e7eb;
+    color: #24443f;
+    background: #eef8f5;
+    font-size: 15px;
+}
+
+.dashboardRow h3 span {
+    display: grid;
+    place-items: center;
+    width: 24px;
+    height: 24px;
+    flex: 0 0 24px;
+    border-radius: 7px;
+    color: #0f766e;
+    background: white;
+    font-weight: 700;
+}
+
+.placeholderContent {
+    padding: 11px 15px;
+    color: #6b7280;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.healthNotice {
+    margin: 10px 2px 0;
+    color: #6b7280;
+    font-size: 12px;
+}
+
+#chatWindow {
+    flex: 1;
+    min-height: 240px;
+    overflow-y: auto;
+    border: 1px solid #d9d9e3;
+    border-radius: 12px;
+    padding: 16px;
+    background: white;
+}
+
+#chatInputArea {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+#chatInput {
+    flex: 1;
+    padding: 12px 14px;
+    font-size: 16px;
+    border: 1px solid #c5c5d2;
+    border-radius: 10px;
+}
+
+button {
+    padding: 10px 14px;
+    font-size: 16px;
+    cursor: pointer;
+    border: 1px solid #c5c5d2;
+    border-radius: 8px;
+    background: white;
+}
+
+button:hover {
+    background: #ececf1;
+}
+
+.iconButton {
+    display: grid;
+    place-items: center;
+    width: 42px;
+    height: 42px;
+    padding: 0;
+    font-size: 22px;
+}
+
+.sidebar {
+    position: fixed;
+    inset: 0 auto 0 0;
+    z-index: 20;
+    width: min(300px, 85vw);
+    padding: 16px;
+    box-sizing: border-box;
+    background: #f7f7f8;
+    border-right: 1px solid #d9d9e3;
+    box-shadow: 8px 0 24px rgb(0 0 0 / 12%);
+    transform: translateX(-105%);
+    transition: transform 180ms ease;
+}
+
+.sidebar.open {
+    transform: translateX(0);
+}
+
+.sidebarHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 18px;
+}
+
+.sidebarHeader h2 {
+    margin: 0;
+    font-size: 20px;
+}
+
+.menuList {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.menuItem {
+    width: 100%;
+    padding: 13px 14px;
+    text-align: left;
+    border: 0;
+    background: transparent;
+}
+
+.menuOverlay {
+    position: fixed;
+    inset: 0;
+    z-index: 10;
+    background: rgb(0 0 0 / 35%);
+}
+
+.remindersPage {
+    position: fixed;
+    inset: 0;
+    z-index: 30;
+    display: flex;
+    flex-direction: column;
+    background: #f7f7f8;
+}
+
+.remindersPage[hidden] {
+    display: none;
+}
+
+.pageHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 64px;
+    padding: 0 22px;
+    background: white;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.pageHeader h2 {
+    margin: 0;
+    font-size: 22px;
+}
+
+.remindersContent {
+    width: min(760px, calc(100% - 32px));
+    margin: 0 auto;
+    padding: 28px 0;
+    overflow-y: auto;
+}
+
+.reminderList {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.reminderItem,
+.emptyReminders {
+    padding: 16px 18px;
+    border: 1px solid #d9d9e3;
+    border-radius: 10px;
+    background: white;
+}
+
+.emptyReminders {
+    color: #6b6b75;
+    text-align: center;
+}
+
+.profileContent {
+    width: min(760px, calc(100% - 32px));
+    margin: 0 auto;
+    padding: 28px 0;
+    overflow-y: auto;
+}
+
+.profileForm {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    padding: 22px;
+    border: 1px solid #d9d9e3;
+    border-radius: 12px;
+    background: white;
+}
+
+.diseaseForm {
+    margin-top: 18px;
+}
+
+.profileSectionHeading {
+    padding-bottom: 14px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.profileSectionHeading h3 {
+    margin: 0 0 5px;
+    color: #24443f;
+    font-size: 19px;
+}
+
+.profileSectionHeading p {
+    margin: 0;
+    color: #6b7280;
+    font-size: 13px;
+    line-height: 1.45;
+}
+
+.profileForm label {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.profileForm label > span {
+    color: #374151;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.profileForm input,
+.profileForm textarea {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 11px 12px;
+    border: 1px solid #c5c5d2;
+    border-radius: 8px;
+    font: inherit;
+    background: white;
+}
+
+.profileForm textarea {
+    resize: vertical;
+}
+
+.choiceGroup {
+    margin: 0;
+    padding: 14px;
+    border: 1px solid #d9d9e3;
+    border-radius: 9px;
+}
+
+.choiceGroup legend {
+    padding: 0 6px;
+    color: #374151;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.choiceOptions {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 9px 14px;
+}
+
+.choiceOptions.compactChoices {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+}
+
+.choiceOptions label {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 7px;
+    color: #4b5563;
+    font-size: 14px;
+}
+
+.choiceOptions input[type="radio"] {
+    width: auto;
+    margin: 0;
+    accent-color: #0f766e;
+}
+
+.profileForm input:focus,
+.profileForm textarea:focus {
+    border-color: #0f766e;
+    outline: 2px solid rgb(15 118 110 / 16%);
+}
+
+.profileWideField {
+    grid-column: 1 / -1;
+}
+
+.profileActions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 16px;
+}
+
+.primaryButton {
+    color: white;
+    border-color: #0f766e;
+    background: #0f766e;
+}
+
+.primaryButton:hover {
+    background: #0b5f59;
+}
+
+.profileSaveStatus {
+    margin: 0 auto 0 0;
+    color: #0f766e;
+    font-size: 14px;
+}
+
+.profilePrivacyNotice {
+    margin: 12px 2px 0;
+    color: #6b7280;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+@media (max-width: 600px) {
+    main {
+        width: calc(100% - 20px);
+        padding: 10px 0;
+    }
+
+    header {
+        min-height: 56px;
+        padding: 0 10px;
+    }
+
+    .pageHeader {
+        min-height: 56px;
+        padding: 0 12px 0 16px;
+    }
+
+    .dashboardIntro {
+        flex-direction: column;
+        gap: 10px;
+        padding: 15px;
+    }
+
+    .dashboardRow {
+        grid-template-columns: 1fr;
+    }
+
+    .dashboardRow h3 {
+        border-right: 0;
+        border-bottom: 1px solid #e5e7eb;
+    }
+
+    .placeholderContent {
+        padding: 10px 14px;
+    }
+
+    .profileForm {
+        grid-template-columns: 1fr;
+        padding: 16px;
+    }
+
+    .profileWideField {
+        grid-column: auto;
+    }
+
+    .profileActions {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .choiceOptions,
+    .choiceOptions.compactChoices {
+        grid-template-columns: 1fr;
+    }
+}
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    color: #202123;
+    background: #f7f7f8;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    min-height: 64px;
+    padding: 0 18px;
+    background: #ffffff;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 20px;
+}
+
+main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    width: min(900px, calc(100% - 32px));
+    min-height: 0;
+    margin: 0 auto;
+    padding: 18px 0;
+    overflow-y: auto;
+}
+
+.todayDashboard {
+    margin-bottom: 18px;
+}
+
+.dashboardIntro {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 14px;
+    padding: 18px 20px;
+    border: 1px solid #cfe7df;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #eefbf7, #f6f8ff);
+}
+
+.dashboardEyebrow {
+    margin: 0 0 4px;
+    color: #0f766e;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.dashboardIntro h2 {
+    margin: 0;
+    font-size: 22px;
+}
+
+.greetingMessage {
+    max-width: 430px;
+    margin: 2px 0 0;
+    color: #3f4b5b;
+    line-height: 1.5;
+}
+
+.dashboardTable {
+    border: 1px solid #d9d9e3;
+    border-radius: 12px;
+    background: white;
+    box-shadow: 0 2px 8px rgb(0 0 0 / 4%);
+    overflow: hidden;
+}
+
+.dashboardRow {
+    display: grid;
+    grid-template-columns: minmax(190px, 28%) 1fr;
+    align-items: center;
+    min-height: 52px;
+}
+
+.dashboardRow + .dashboardRow {
+    border-top: 1px solid #e5e7eb;
+}
+
+.dashboardRow h3 {
+    align-self: stretch;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin: 0;
+    padding: 11px 14px;
+    border-right: 1px solid #e5e7eb;
+    color: #24443f;
+    background: #eef8f5;
+    font-size: 15px;
+}
+
+.dashboardRow h3 span {
+    display: grid;
+    place-items: center;
+    width: 24px;
+    height: 24px;
+    flex: 0 0 24px;
+    border-radius: 7px;
+    color: #0f766e;
+    background: white;
+    font-weight: 700;
+}
+
+.placeholderContent {
+    padding: 11px 15px;
+    color: #6b7280;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.healthNotice {
+    margin: 10px 2px 0;
+    color: #6b7280;
+    font-size: 12px;
+}
+
+#chatWindow {
+    flex: 1;
+    min-height: 240px;
+    overflow-y: auto;
+    border: 1px solid #d9d9e3;
+    border-radius: 12px;
+    padding: 16px;
+    background: white;
+}
+
+#chatInputArea {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+#chatInput {
+    flex: 1;
+    padding: 12px 14px;
+    font-size: 16px;
+    border: 1px solid #c5c5d2;
+    border-radius: 10px;
+}
+
+button {
+    padding: 10px 14px;
+    font-size: 16px;
+    cursor: pointer;
+    border: 1px solid #c5c5d2;
+    border-radius: 8px;
+    background: white;
+}
+
+button:hover {
+    background: #ececf1;
+}
+
+.iconButton {
+    display: grid;
+    place-items: center;
+    width: 42px;
+    height: 42px;
+    padding: 0;
+    font-size: 22px;
+}
+
+.sidebar {
+    position: fixed;
+    inset: 0 auto 0 0;
+    z-index: 20;
+    width: min(300px, 85vw);
+    padding: 16px;
+    box-sizing: border-box;
+    background: #f7f7f8;
+    border-right: 1px solid #d9d9e3;
+    box-shadow: 8px 0 24px rgb(0 0 0 / 12%);
+    transform: translateX(-105%);
+    transition: transform 180ms ease;
+}
+
+.sidebar.open {
+    transform: translateX(0);
+}
+
+.sidebarHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 18px;
+}
+
+.sidebarHeader h2 {
+    margin: 0;
+    font-size: 20px;
+}
+
+.menuList {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.menuItem {
+    width: 100%;
+    padding: 13px 14px;
+    text-align: left;
+    border: 0;
+    background: transparent;
+}
+
+.menuOverlay {
+    position: fixed;
+    inset: 0;
+    z-index: 10;
+    background: rgb(0 0 0 / 35%);
+}
+
+.remindersPage {
+    position: fixed;
+    inset: 0;
+    z-index: 30;
+    display: flex;
+    flex-direction: column;
+    background: #f7f7f8;
+}
+
+.remindersPage[hidden] {
+    display: none;
+}
+
+.pageHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 64px;
+    padding: 0 22px;
+    background: white;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.pageHeader h2 {
+    margin: 0;
+    font-size: 22px;
+}
+
+.remindersContent {
+    width: min(760px, calc(100% - 32px));
+    margin: 0 auto;
+    padding: 28px 0;
+    overflow-y: auto;
+}
+
+.reminderList {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.reminderItem,
+.emptyReminders {
+    padding: 16px 18px;
+    border: 1px solid #d9d9e3;
+    border-radius: 10px;
+    background: white;
+}
+
+.emptyReminders {
+    color: #6b6b75;
+    text-align: center;
+}
+
+.profileContent {
+    width: min(760px, calc(100% - 32px));
+    margin: 0 auto;
+    padding: 28px 0;
+    overflow-y: auto;
+}
+
+.profileForm {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    padding: 22px;
+    border: 1px solid #d9d9e3;
+    border-radius: 12px;
+    background: white;
+}
+
+.diseaseForm {
+    margin-top: 18px;
+}
+
+.profileSectionHeading {
+    padding-bottom: 14px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.profileSectionHeading h3 {
+    margin: 0 0 5px;
+    color: #24443f;
+    font-size: 19px;
+}
+
+.profileSectionHeading p {
+    margin: 0;
+    color: #6b7280;
+    font-size: 13px;
+    line-height: 1.45;
+}
+
+.profileForm label {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.profileForm label > span {
+    color: #374151;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.profileForm input,
+.profileForm textarea {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 11px 12px;
+    border: 1px solid #c5c5d2;
+    border-radius: 8px;
+    font: inherit;
+    background: white;
+}
+
+.profileForm textarea {
+    resize: vertical;
+}
+
+.choiceGroup {
+    margin: 0;
+    padding: 14px;
+    border: 1px solid #d9d9e3;
+    border-radius: 9px;
+}
+
+.choiceGroup legend {
+    padding: 0 6px;
+    color: #374151;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.choiceOptions {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 9px 14px;
+}
+
+.choiceOptions.compactChoices {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+}
+
+.choiceOptions label {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 7px;
+    color: #4b5563;
+    font-size: 14px;
+}
+
+.choiceOptions input[type="radio"] {
+    width: auto;
+    margin: 0;
+    accent-color: #0f766e;
+}
+
+.profileForm input:focus,
+.profileForm textarea:focus {
+    border-color: #0f766e;
+    outline: 2px solid rgb(15 118 110 / 16%);
+}
+
+.profileWideField {
+    grid-column: 1 / -1;
+}
+
+.profileActions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 16px;
+}
+
+.primaryButton {
+    color: white;
+    border-color: #0f766e;
+    background: #0f766e;
+}
+
+.primaryButton:hover {
+    background: #0b5f59;
+}
+
+.profileSaveStatus {
+    margin: 0 auto 0 0;
+    color: #0f766e;
+    font-size: 14px;
+}
+
+.profilePrivacyNotice {
+    margin: 12px 2px 0;
+    color: #6b7280;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+@media (max-width: 600px) {
+    main {
+        width: calc(100% - 20px);
+        padding: 10px 0;
+    }
+
+    header {
+        min-height: 56px;
+        padding: 0 10px;
+    }
+
+    .pageHeader {
+        min-height: 56px;
+        padding: 0 12px 0 16px;
+    }
+
+    .dashboardIntro {
+        flex-direction: column;
+        gap: 10px;
+        padding: 15px;
+    }
+
+    .dashboardRow {
+        grid-template-columns: 1fr;
+    }
+
+    .dashboardRow h3 {
+        border-right: 0;
+        border-bottom: 1px solid #e5e7eb;
+    }
+
+    .placeholderContent {
+        padding: 10px 14px;
+    }
+
+    .profileForm {
+        grid-template-columns: 1fr;
+        padding: 16px;
+    }
+
+    .profileWideField {
+        grid-column: auto;
+    }
+
+    .profileActions {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .choiceOptions,
+    .choiceOptions.compactChoices {
+        grid-template-columns: 1fr;
     }
 }
