@@ -38,6 +38,73 @@
         <div id="remindersContent" class="remindersContent"></div>
     </section>
 
+    <section
+        id="infoPage"
+        class="remindersPage"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="infoTitle"
+        hidden
+    >
+        <div class="pageHeader">
+            <h2 id="infoTitle">Personal Information</h2>
+            <button id="closeInfoBtn" class="iconButton" aria-label="Close personal information">✕</button>
+        </div>
+
+        <div class="profileContent">
+            <form id="profileForm" class="profileForm">
+                <label>
+                    <span>Name</span>
+                    <input id="profileName" name="name" type="text" autocomplete="name" placeholder="Your name">
+                </label>
+
+                <label>
+                    <span>Birthday</span>
+                    <input id="profileBirthday" name="birthday" type="date" autocomplete="bday">
+                </label>
+
+                <label>
+                    <span>Email</span>
+                    <input id="profileEmail" name="email" type="email" autocomplete="email" placeholder="name@example.com">
+                </label>
+
+                <label>
+                    <span>Phone</span>
+                    <input id="profilePhone" name="phone" type="tel" autocomplete="tel" placeholder="Phone number">
+                </label>
+
+                <label class="profileWideField">
+                    <span>Address</span>
+                    <input id="profileAddress" name="address" type="text" autocomplete="street-address" placeholder="Address">
+                </label>
+
+                <label>
+                    <span>Emergency Contact</span>
+                    <input id="profileEmergencyName" name="emergencyContactName" type="text" placeholder="Contact name">
+                </label>
+
+                <label>
+                    <span>Emergency Phone</span>
+                    <input id="profileEmergencyPhone" name="emergencyContactPhone" type="tel" placeholder="Contact phone">
+                </label>
+
+                <label class="profileWideField">
+                    <span>Notes</span>
+                    <textarea id="profileNotes" name="notes" rows="4" placeholder="Additional information"></textarea>
+                </label>
+
+                <div class="profileActions profileWideField">
+                    <p id="profileSaveStatus" class="profileSaveStatus" role="status"></p>
+                    <button type="submit" class="primaryButton">Save Information</button>
+                </div>
+            </form>
+
+            <p class="profilePrivacyNotice">
+                This information is stored as JSON only in this browser. Avoid saving sensitive medical or financial information on a shared device.
+            </p>
+        </div>
+    </section>
+
     <header>
         <button
             id="manualBtn"
