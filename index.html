@@ -1,150 +1,12 @@
-Last login: Sun Aug  9 23:19:55 on ttys003
-bash
-chizhang@ ~ % bash
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Agent</title>
+    <link rel="stylesheet" href="style.css">
+</head>
 
-The default interactive shell is now zsh.
-To update your account to use zsh, please run `chsh -s /bin/zsh`.
-For more details, please visit https://support.apple.com/kb/HT208050.
-[chizhang ~]$ cd Downloads/AI\ Agent
-[chizhang AI Agent]$ l
-bash: l: command not found
-[chizhang AI Agent]$ ls
-app.js     index.html modules    style.css
-[chizhang AI Agent]$ vi app.js 
-[chizhang AI Agent]$ vi index.html 
-[chizhang AI Agent]$ ls
-app.js     index.html modules    style.css
-[chizhang AI Agent]$ cd modules/
-[chizhang modules]$ ls
-chat.js      documents.js reminders.js
-[chizhang modules]$ vi documents.js 
-[chizhang modules]$ ls
-chat.js      documents.js reminders.js
-[chizhang modules]$ cd ..
-[chizhang AI Agent]$ ls
-app.js     index.html modules    style.css
-[chizhang AI Agent]$ python3 -m http.server 8000
-Serving HTTP on :: port 8000 (http://[::]:8000/) ...
-::1 - - [10/Aug/2026 10:49:09] "GET / HTTP/1.1" 200 -
-::1 - - [10/Aug/2026 10:49:09] "GET /style.css HTTP/1.1" 200 -
-::1 - - [10/Aug/2026 10:49:09] "GET /modules/chat.js HTTP/1.1" 200 -
-::1 - - [10/Aug/2026 10:49:09] "GET /modules/documents.js HTTP/1.1" 200 -
-::1 - - [10/Aug/2026 10:49:09] "GET /app.js HTTP/1.1" 200 -
-::1 - - [10/Aug/2026 10:49:09] "GET /modules/reminders.js HTTP/1.1" 200 -
-::1 - - [10/Aug/2026 10:49:09] code 404, message File not found
-::1 - - [10/Aug/2026 10:49:09] "GET /favicon.ico HTTP/1.1" 404 -
-::1 - - [10/Aug/2026 11:03:02] "GET / HTTP/1.1" 304 -
-::1 - - [10/Aug/2026 11:03:02] "GET /modules/documents.js HTTP/1.1" 200 -
-::1 - - [10/Aug/2026 11:03:02] "GET /style.css HTTP/1.1" 304 -
-::1 - - [10/Aug/2026 11:03:02] "GET /modules/chat.js HTTP/1.1" 200 -
-::1 - - [10/Aug/2026 11:03:02] "GET /modules/reminders.js HTTP/1.1" 200 -
-::1 - - [10/Aug/2026 11:03:02] "GET /app.js HTTP/1.1" 304 -
-^C
-Keyboard interrupt received, exiting.
-[chizhang AI Agent]$ vi index.html 
-[chizhang AI Agent]$ ls
-app.js     index.html modules    style.css
-[chizhang AI Agent]$ python3 -m http.server 8000
-Serving HTTP on :: port 8000 (http://[::]:8000/) ...
-::1 - - [10/Aug/2026 11:04:44] "GET /modules/documents.js HTTP/1.1" 304 -
-::1 - - [10/Aug/2026 11:04:44] "GET /modules/reminders.js HTTP/1.1" 304 -
-::1 - - [10/Aug/2026 11:04:44] "GET /modules/chat.js HTTP/1.1" 304 -
-^X^C
-Keyboard interrupt received, exiting.
-[chizhang AI Agent]$ ls
-app.js     index.html modules    style.css
-[chizhang AI Agent]$ vi index.html 
-[chizhang AI Agent]$ python3 -m http.server 8000
-Serving HTTP on :: port 8000 (http://[::]:8000/) ...
-::1 - - [10/Aug/2026 11:24:43] "GET / HTTP/1.1" 200 -
-::1 - - [10/Aug/2026 11:24:43] "GET /style.css HTTP/1.1" 304 -
-::1 - - [10/Aug/2026 11:24:43] "GET /app.js HTTP/1.1" 304 -
-::1 - - [10/Aug/2026 11:24:43] "GET /modules/chat.js HTTP/1.1" 200 -
-::1 - - [10/Aug/2026 11:24:43] "GET /modules/reminders.js HTTP/1.1" 304 -
-::1 - - [10/Aug/2026 11:24:43] "GET /modules/documents.js HTTP/1.1" 304 -
-::1 - - [10/Aug/2026 11:28:03] "GET / HTTP/1.1" 304 -
-::1 - - [10/Aug/2026 11:28:03] "GET /modules/chat.js HTTP/1.1" 200 -
-^C
-Keyboard interrupt received, exiting.
-[chizhang AI Agent]$ ls
-app.js     index.html modules    style.css
-[chizhang AI Agent]$ vi index.html 
-[chizhang AI Agent]$ vi style.css 
-[chizhang AI Agent]$ vi style.css 
-[chizhang AI Agent]$ vi index.html 
-[chizhang AI Agent]$ python3 -m http.server 8000
-Serving HTTP on :: port 8000 (http://[::]:8000/) ...
-::1 - - [11/Aug/2026 17:22:39] "GET / HTTP/1.1" 200 -
-::1 - - [11/Aug/2026 17:22:39] "GET /app.js HTTP/1.1" 200 -
-::1 - - [11/Aug/2026 17:22:39] "GET /style.css HTTP/1.1" 200 -
-::1 - - [11/Aug/2026 17:22:39] "GET /modules/documents.js HTTP/1.1" 304 -
-::1 - - [11/Aug/2026 17:22:39] "GET /modules/reminders.js HTTP/1.1" 304 -
-::1 - - [11/Aug/2026 17:22:39] "GET /modules/chat.js HTTP/1.1" 304 -
-^C
-Keyboard interrupt received, exiting.
-[chizhang AI Agent]$ ls
-app.js     index.html modules    style.css
-[chizhang AI Agent]$ modules/
-bash: modules/: is a directory
-[chizhang AI Agent]$ cd modules/
-[chizhang modules]$ ls
-chat.js      documents.js reminders.js
-[chizhang modules]$ vi documents.js 
-[chizhang modules]$ cd ..
-[chizhang AI Agent]$ vi app.js 
-[chizhang AI Agent]$ vi style.css 
-[chizhang AI Agent]$ vi index.html 
-[chizhang AI Agent]$ vi style.css 
-[chizhang AI Agent]$ vi style.css 
-[chizhang AI Agent]$ vi index.html 
-[chizhang AI Agent]$ vi style.css 
-[chizhang AI Agent]$ vi index.html 
-[chizhang AI Agent]$ vi style.css 
-[chizhang AI Agent]$ vi index.html 
-[chizhang AI Agent]$ vi style.css 
-[chizhang AI Agent]$ vi index.html 
-[chizhang AI Agent]$ vi style.css 
-[chizhang AI Agent]$ vi index.html 
-[chizhang AI Agent]$ python3 -m http.server 8000
-Serving HTTP on :: port 8000 (http://[::]:8000/) ...
-::1 - - [11/Aug/2026 20:56:15] "GET / HTTP/1.1" 200 -
-::1 - - [11/Aug/2026 20:56:15] "GET /style.css HTTP/1.1" 200 -
-::1 - - [11/Aug/2026 20:56:15] "GET /app.js HTTP/1.1" 200 -
-::1 - - [11/Aug/2026 20:56:15] "GET /modules/documents.js HTTP/1.1" 304 -
-::1 - - [11/Aug/2026 20:56:15] "GET /modules/reminders.js HTTP/1.1" 304 -
-::1 - - [11/Aug/2026 20:56:15] "GET /modules/chat.js HTTP/1.1" 304 -
-::1 - - [11/Aug/2026 21:10:25] "GET / HTTP/1.1" 200 -
-::1 - - [11/Aug/2026 21:13:54] "GET / HTTP/1.1" 200 -
-::1 - - [11/Aug/2026 21:14:46] "GET / HTTP/1.1" 200 -
-::1 - - [11/Aug/2026 21:14:47] "GET / HTTP/1.1" 304 -
-::1 - - [11/Aug/2026 21:14:54] "GET / HTTP/1.1" 304 -
-^C
-Keyboard interrupt received, exiting.
-[chizhang AI Agent]$ python3 -m http.server 8000
-Serving HTTP on :: port 8000 (http://[::]:8000/) ...
-::1 - - [11/Aug/2026 21:15:15] "GET / HTTP/1.1" 304 -
-::1 - - [11/Aug/2026 21:15:16] "GET / HTTP/1.1" 304 -
-::1 - - [11/Aug/2026 21:15:23] "GET / HTTP/1.1" 304 -
-^C
-Keyboard interrupt received, exiting.
-[chizhang AI Agent]$ python3 -m http.server 8000
-Serving HTTP on :: port 8000 (http://[::]:8000/) ...
-::1 - - [11/Aug/2026 21:15:36] "GET / HTTP/1.1" 304 -
-^C
-Keyboard interrupt received, exiting.
-[chizhang AI Agent]$ ls
-app.js     index.html modules    style.css
-[chizhang AI Agent]$ vi index.html 
-
-<!DOCTYPE html>^M
-<html lang="en">^M
-<head>^M
-    <meta charset="UTF-8">^M
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">^M
-    <title>AI Agent</title>^M
-    <link rel="stylesheet" href="style.css">^M
-</head>^M
-^M
 <body>
     <aside id="sidebar" class="sidebar" aria-hidden="true">
         <div class="sidebarHeader">
@@ -183,4 +45,65 @@ app.js     index.html modules    style.css
             aria-label="Open menu"
             aria-controls="sidebar"
             aria-expanded="false"
-                                                                                                                                    
+        >☰</button>
+        <h1>RTCompanion</h1>
+    </header>
+
+    <main>
+        <section class="todayDashboard" aria-labelledby="todayDashboardTitle">
+            <div class="dashboardIntro">
+                <div>
+                    <p id="currentDate" class="dashboardEyebrow">Current date</p>
+                    <h2 id="todayDashboardTitle">Your daily overview</h2>
+                </div>
+                <p class="greetingMessage" id="greetingMessage">
+                    Hello! Your personalized daily greeting will appear here.
+                </p>
+            </div>
+
+            <div class="dashboardTable">
+                <article class="dashboardRow">
+                    <h3><span aria-hidden="true">✓</span> Today's Tasks</h3>
+                    <div id="todayTasks" class="placeholderContent">
+                        Task information and additional tasks will appear here.
+                    </div>
+                </article>
+
+                <article class="dashboardRow">
+                    <h3><span aria-hidden="true">◷</span> Appointments</h3>
+                    <div id="todayAppointments" class="placeholderContent">
+                        Appointment time, location, and details will appear here.
+                    </div>
+                </article>
+
+                <article class="dashboardRow">
+                    <h3><span aria-hidden="true">✚</span> Medicine Schedule</h3>
+                    <div id="todayMedicines" class="placeholderContent">
+                        Medicine name, dose, and time will appear here.
+                    </div>
+                </article>
+
+                <article class="dashboardRow">
+                    <h3><span aria-hidden="true">♡</span> Symptoms &amp; Changes</h3>
+                    <div id="todaySymptoms" class="placeholderContent">
+                        Potential symptoms, expected changes, and guidance will appear here.
+                    </div>
+                </article>
+            </div>
+
+            <p class="healthNotice">
+                Placeholder only — future health messages should be reviewed by a qualified healthcare professional.
+            </p>
+        </section>
+
+        <div id="chatWindow"></div>
+
+        <div id="chatInputArea">
+            <input id="chatInput" type="text" placeholder="Ask me anything">
+            <button id="sendBtn">Send</button>
+        </div>
+    </main>
+
+    <script type="module" src="app.js"></script>
+</body>
+</html>
