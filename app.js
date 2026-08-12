@@ -7,6 +7,45 @@ const menuOverlay = document.getElementById("menuOverlay");
 const manualBtn = document.getElementById("manualBtn");
 const remindersPage = document.getElementById("remindersPage");
 const remindersContent = document.getElementById("remindersContent");
+const infoPage = document.getElementById("infoPage");
+const profileForm = document.getElementById("profileForm");
+const profileSaveStatus = document.getElementById("profileSaveStatus");
+
+const PROFILE_STORAGE_KEY = "rtCompanionProfile";
+const EMPTY_PROFILE = {
+    name: "",
+    birthday: "",
+    email: "",
+    phone: "",
+    address: "",
+    emergencyContactName: "",
+    emergencyContactPhone: "",
+    notes: ""
+};
+
+function loadProfile() {
+    try {
+        const storedProfile = JSON.parse(
+            localStorage.getItem(PROFILE_STORAGE_KEY) || "{}"
+        );
+        return { ...EMPTY_PROFILE, ...storedProfile };
+    } catch (error) {
+        console.error("Could not read the stored profile JSON.", error);
+        return { ...EMPTY_PROFILE };
+    }
+}
+
+function saveProfile(profile) {
+    const safeProfile = Object.fromEntries(
+        Object.keys(EMPTY_PROFILE).map(key => [
+            key,
+            String(profile[key] || "").trim()
+        ])
+    );
+
+    localStorage.setItem(PROFILE_STORAGE_KEY, JSON.stringify(safeProfile));
+    return safeProfile;
+}
 
 document.getElementById("currentDate").textContent = new Intl.DateTimeFormat(
     navigator.language,
@@ -58,15 +97,45 @@ function openRemindersPage() {
     document.getElementById("closeRemindersBtn").focus();
 }
 
+function fillProfileForm(profile) {
+    Object.entries(profile).forEach(([fieldName, value]) => {
+        const field = profileForm.elements.namedItem(fieldName);
+        if (field) field.value = value;
+    });
+}
+
+function updateGreeting(profile) {
+    if (profile.name) {
+        document.getElementById("greetingMessage").textContent =
+            `Hello, ${profile.name}! Your personalized daily message will appear here.`;
+    }
+}
+
+function closeInfoPage() {
+    infoPage.hidden = true;
+    document.getElementById("personBtn").focus();
+}
+
+function openInfoPage() {
+    fillProfileForm(loadProfile());
+    profileSaveStatus.textContent = "";
+    setMenuOpen(false);
+    infoPage.hidden = false;
+    document.getElementById("closeInfoBtn").focus();
+}
+
 manualBtn.onclick = () => setMenuOpen(true);
 document.getElementById("closeMenuBtn").onclick = () => setMenuOpen(false);
 menuOverlay.onclick = () => setMenuOpen(false);
 document.getElementById("closeRemindersBtn").onclick = closeRemindersPage;
+document.getElementById("closeInfoBtn").onclick = closeInfoPage;
 
 document.addEventListener("keydown", event => {
     if (event.key !== "Escape") return;
 
-    if (!remindersPage.hidden) {
+    if (!infoPage.hidden) {
+        closeInfoPage();
+    } else if (!remindersPage.hidden) {
         closeRemindersPage();
     } else {
         setMenuOpen(false);
@@ -95,9 +164,18 @@ document.getElementById("listReminderBtn").onclick = () => {
 };
 
 document.getElementById("personBtn").onclick = () => {
-    alert("AI Agent with chat and reminder tools.");
-    setMenuOpen(false);
+    openInfoPage();
 };
+
+profileForm.addEventListener("submit", event => {
+    event.preventDefault();
+    const savedProfile = saveProfile(Object.fromEntries(new FormData(profileForm)));
+    fillProfileForm(savedProfile);
+    updateGreeting(savedProfile);
+    profileSaveStatus.textContent = "Information saved in this browser.";
+});
+
+updateGreeting(loadProfile());
 
 function appendChat(sender, text) {
     const chatWindow = document.getElementById("chatWindow");
