@@ -282,6 +282,90 @@ button:hover {
     text-align: center;
 }
 
+.profileContent {
+    width: min(760px, calc(100% - 32px));
+    margin: 0 auto;
+    padding: 28px 0;
+    overflow-y: auto;
+}
+
+.profileForm {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    padding: 22px;
+    border: 1px solid #d9d9e3;
+    border-radius: 12px;
+    background: white;
+}
+
+.profileForm label {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.profileForm label > span {
+    color: #374151;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.profileForm input,
+.profileForm textarea {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 11px 12px;
+    border: 1px solid #c5c5d2;
+    border-radius: 8px;
+    font: inherit;
+    background: white;
+}
+
+.profileForm textarea {
+    resize: vertical;
+}
+
+.profileForm input:focus,
+.profileForm textarea:focus {
+    border-color: #0f766e;
+    outline: 2px solid rgb(15 118 110 / 16%);
+}
+
+.profileWideField {
+    grid-column: 1 / -1;
+}
+
+.profileActions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 16px;
+}
+
+.primaryButton {
+    color: white;
+    border-color: #0f766e;
+    background: #0f766e;
+}
+
+.primaryButton:hover {
+    background: #0b5f59;
+}
+
+.profileSaveStatus {
+    margin: 0 auto 0 0;
+    color: #0f766e;
+    font-size: 14px;
+}
+
+.profilePrivacyNotice {
+    margin: 12px 2px 0;
+    color: #6b7280;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
 @media (max-width: 600px) {
     main {
         width: calc(100% - 20px);
@@ -315,5 +399,19 @@ button:hover {
 
     .placeholderContent {
         padding: 10px 14px;
+    }
+
+    .profileForm {
+        grid-template-columns: 1fr;
+        padding: 16px;
+    }
+
+    .profileWideField {
+        grid-column: auto;
+    }
+
+    .profileActions {
+        align-items: stretch;
+        flex-direction: column;
     }
 }
