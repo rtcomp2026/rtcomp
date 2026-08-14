@@ -29,7 +29,8 @@ const EMPTY_TREATMENT = {
     treatmentStartDate: "",
     treatmentStartTime: "",
     treatmentLocation: "",
-    treatmentPlaceId: ""
+    treatmentPlaceId: "",
+    treatmentOfficeNumber: ""
 };
 
 let hospitalSearchTimer;
@@ -243,7 +244,7 @@ function closeRemindersPage() {
     document.getElementById("listReminderBtn").focus();
 }
 
-function openRemindersPage() {
+function renderReminders() {
     const reminders = listReminders();
     remindersContent.replaceChildren();
 
@@ -266,6 +267,10 @@ function openRemindersPage() {
         remindersContent.appendChild(reminderList);
     }
 
+}
+
+function openRemindersPage() {
+    renderReminders();
     setMenuOpen(false);
     remindersPage.hidden = false;
     document.getElementById("closeRemindersBtn").focus();
@@ -403,10 +408,13 @@ chatInput.addEventListener("keydown", event => {
     }
 });
 
-document.getElementById("newReminderBtn").onclick = () => {
+document.getElementById("addReminderBtn").onclick = () => {
     const text = prompt("Enter reminder text:");
-    if (text) addReminder(text);
-    setMenuOpen(false);
+    if (!text?.trim()) return;
+
+    addReminder(text.trim());
+    renderReminders();
+    document.getElementById("addReminderBtn").focus();
 };
 
 document.getElementById("listReminderBtn").onclick = () => {
