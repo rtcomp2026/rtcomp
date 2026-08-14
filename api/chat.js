@@ -61,14 +61,27 @@ export default {
             const data = await geminiResponse.json().catch(() => ({}));
             if (!geminiResponse.ok) {
                 console.error("Gemini API error", geminiResponse.status, data.error?.message);
+                const googleStatus = data.error?.status || "UNKNOWN";
                 const invalidKey = geminiResponse.status === 400 &&
                     /api key.*(not valid|invalid)/i.test(data.error?.message || "");
+                let publicError = `Gemini rejected the request (${geminiResponse.status}: ${googleStatus}). Check the Vercel Function Logs.`;
+
+                if (invalidKey) {
+                    publicError = "Vercel's GEMINI_API_KEY was rejected. Create a new Gemini API key in Google AI Studio, update the Vercel environment variable, and redeploy.";
+                } else if (geminiResponse.status === 400 && googleStatus === "FAILED_PRECONDITION") {
+                    publicError = "Gemini requires billing or another project prerequisite. Check the key's project in Google AI Studio.";
+                } else if (geminiResponse.status === 401 || geminiResponse.status === 403) {
+                    publicError = `The Gemini key lacks permission (${geminiResponse.status}: ${googleStatus}). Check that it was created in Google AI Studio and can access the Gemini API.`;
+                } else if (geminiResponse.status === 404) {
+                    publicError = `The configured Gemini model is unavailable (${googleStatus}).`;
+                } else if (geminiResponse.status === 429) {
+                    publicError = "The AI service is busy or has reached its usage limit. Please try again later.";
+                } else if (geminiResponse.status >= 500) {
+                    publicError = "The Gemini service is temporarily unavailable. Please try again later.";
+                }
+
                 return json({
-                    error: invalidKey
-                        ? "Vercel's GEMINI_API_KEY was rejected. Create a new Gemini API key in Google AI Studio, update the Vercel environment variable, and redeploy."
-                        : geminiResponse.status === 429
-                            ? "The AI service is busy or has reached its usage limit. Please try again later."
-                            : "Gemini could not complete the request."
+                    error: publicError
                 }, geminiResponse.status >= 500 ? 502 : geminiResponse.status);
             }
 
