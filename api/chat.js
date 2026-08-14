@@ -17,7 +17,7 @@ export default {
             return json({ error: "Method not allowed." }, 405);
         }
 
-        const apiKey = process.env.GEMINI_API_KEY;
+        const apiKey = process.env.GEMINI_API_KEY?.trim();
         if (!apiKey) {
             console.error("GEMINI_API_KEY is not configured.");
             return json({
@@ -61,10 +61,14 @@ export default {
             const data = await geminiResponse.json().catch(() => ({}));
             if (!geminiResponse.ok) {
                 console.error("Gemini API error", geminiResponse.status, data.error?.message);
+                const invalidKey = geminiResponse.status === 400 &&
+                    /api key.*(not valid|invalid)/i.test(data.error?.message || "");
                 return json({
-                    error: geminiResponse.status === 429
-                        ? "The AI service is busy or has reached its usage limit. Please try again later."
-                        : "Gemini could not complete the request."
+                    error: invalidKey
+                        ? "Vercel's GEMINI_API_KEY was rejected. Create a new Gemini API key in Google AI Studio, update the Vercel environment variable, and redeploy."
+                        : geminiResponse.status === 429
+                            ? "The AI service is busy or has reached its usage limit. Please try again later."
+                            : "Gemini could not complete the request."
                 }, geminiResponse.status >= 500 ? 502 : geminiResponse.status);
             }
 
@@ -84,4 +88,3 @@ export default {
         }
     }
 };
-
