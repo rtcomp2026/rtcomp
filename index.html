@@ -15,8 +15,7 @@
         </div>
 
         <nav class="menuList" aria-label="Main menu">
-            <button id="newReminderBtn" class="menuItem">➕ New Reminder</button>
-            <button id="listReminderBtn" class="menuItem">📅 All Reminders</button>
+            <button id="listReminderBtn" class="menuItem">📅 Reminders</button>
             <button id="personBtn" class="menuItem">👤 Info</button>
             <button id="treatmentInfoBtn" class="menuItem">🏥 Treatment Information</button>
             <button id="treatmentJourneyBtn" class="menuItem">🧭 Treatment Journey</button>
@@ -35,8 +34,11 @@
         hidden
     >
         <div class="pageHeader">
-            <h2 id="remindersTitle">All Reminders</h2>
-            <button id="closeRemindersBtn" class="iconButton" aria-label="Close reminders">✕</button>
+            <h2 id="remindersTitle">Reminders</h2>
+            <div class="pageHeaderActions">
+                <button id="addReminderBtn" class="primaryButton">＋ Add Reminder</button>
+                <button id="closeRemindersBtn" class="iconButton" aria-label="Close reminders">✕</button>
+            </div>
         </div>
         <div id="remindersContent" class="remindersContent"></div>
     </section>
@@ -250,6 +252,17 @@
                             hidden
                         ></ul>
                     </div>
+                </label>
+
+                <label class="profileWideField">
+                    <span>Hospital Office Number (optional)</span>
+                    <input
+                        id="treatmentOfficeNumber"
+                        name="treatmentOfficeNumber"
+                        type="tel"
+                        autocomplete="tel"
+                        placeholder="For example, (402) 555-0123"
+                    >
                 </label>
 
                 <div class="mapActions profileWideField">
