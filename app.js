@@ -16,6 +16,9 @@ const treatmentPage = document.getElementById("treatmentPage");
 const treatmentForm = document.getElementById("treatmentForm");
 const treatmentSaveStatus = document.getElementById("treatmentSaveStatus");
 const treatmentDirectionsLink = document.getElementById("treatmentDirectionsLink");
+const treatmentLocationInput = document.getElementById("treatmentLocation");
+const treatmentPlaceIdInput = document.getElementById("treatmentPlaceId");
+const hospitalSuggestions = document.getElementById("hospitalSuggestions");
 const treatmentJourneyPage = document.getElementById("treatmentJourneyPage");
 const informationDatabasePage = document.getElementById("informationDatabasePage");
 
@@ -25,8 +28,15 @@ const EMPTY_TREATMENT = {
     treatmentType: "",
     treatmentStartDate: "",
     treatmentStartTime: "",
-    treatmentLocation: ""
+    treatmentLocation: "",
+    treatmentPlaceId: ""
 };
+
+let hospitalSearchTimer;
+let hospitalSearchController;
+let hospitalSessionToken = createHospitalSessionToken();
+let currentHospitalSuggestions = [];
+let activeHospitalSuggestion = -1;
 const EMPTY_PROFILE = {
     name: "",
     birthday: "",
@@ -107,8 +117,108 @@ function updateTreatmentDirections(treatment) {
     if (!location) return;
 
     document.getElementById("savedTreatmentLocation").textContent = location;
+    const placeId = treatment.treatmentPlaceId.trim();
+    const placeIdParameter = placeId
+        ? `&destination_place_id=${encodeURIComponent(placeId)}`
+        : "";
     treatmentDirectionsLink.href =
-        `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(location)}`;
+        `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(location)}${placeIdParameter}`;
+}
+
+function createHospitalSessionToken() {
+    return crypto.randomUUID?.() ||
+        `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+}
+
+function hideHospitalSuggestions() {
+    hospitalSuggestions.hidden = true;
+    hospitalSuggestions.replaceChildren();
+    treatmentLocationInput.setAttribute("aria-expanded", "false");
+    treatmentLocationInput.removeAttribute("aria-activedescendant");
+    currentHospitalSuggestions = [];
+    activeHospitalSuggestion = -1;
+}
+
+function selectHospitalSuggestion(suggestion) {
+    treatmentLocationInput.value = suggestion.description;
+    treatmentPlaceIdInput.value = suggestion.placeId;
+    hideHospitalSuggestions();
+    hospitalSessionToken = createHospitalSessionToken();
+    treatmentSaveStatus.textContent = "Hospital selected. Save the treatment information when ready.";
+}
+
+function setActiveHospitalSuggestion(index) {
+    const options = [...hospitalSuggestions.querySelectorAll("button")];
+    if (!options.length) return;
+
+    activeHospitalSuggestion = (index + options.length) % options.length;
+    options.forEach((option, optionIndex) => {
+        option.classList.toggle("active", optionIndex === activeHospitalSuggestion);
+        option.setAttribute("aria-selected", String(optionIndex === activeHospitalSuggestion));
+    });
+    const activeOption = options[activeHospitalSuggestion];
+    treatmentLocationInput.setAttribute("aria-activedescendant", activeOption.id);
+    activeOption.scrollIntoView({ block: "nearest" });
+}
+
+function renderHospitalSuggestions(suggestions) {
+    hospitalSuggestions.replaceChildren();
+    currentHospitalSuggestions = suggestions;
+    activeHospitalSuggestion = -1;
+
+    if (!suggestions.length) {
+        const emptyItem = document.createElement("li");
+        emptyItem.className = "hospitalSuggestionMessage";
+        emptyItem.textContent = "No matching hospitals found.";
+        hospitalSuggestions.appendChild(emptyItem);
+    } else {
+        suggestions.forEach((suggestion, index) => {
+            const item = document.createElement("li");
+            item.setAttribute("role", "option");
+
+            const button = document.createElement("button");
+            button.id = `hospital-option-${index}`;
+            button.type = "button";
+            button.className = "hospitalSuggestion";
+            button.setAttribute("aria-selected", "false");
+            button.textContent = suggestion.description;
+            button.addEventListener("mousedown", event => event.preventDefault());
+            button.addEventListener("click", () => selectHospitalSuggestion(suggestion));
+
+            item.appendChild(button);
+            hospitalSuggestions.appendChild(item);
+        });
+    }
+
+    hospitalSuggestions.hidden = false;
+    treatmentLocationInput.setAttribute("aria-expanded", "true");
+}
+
+async function searchHospitals(query) {
+    hospitalSearchController?.abort();
+    hospitalSearchController = new AbortController();
+
+    try {
+        const parameters = new URLSearchParams({
+            input: query,
+            sessionToken: hospitalSessionToken
+        });
+        const response = await fetch(`/api/hospitals?${parameters}`, {
+            signal: hospitalSearchController.signal
+        });
+        const data = await response.json().catch(() => ({}));
+        if (!response.ok) {
+            throw new Error(data.error || "Hospital search is unavailable.");
+        }
+        if (treatmentLocationInput.value.trim() === query) {
+            renderHospitalSuggestions(data.suggestions || []);
+        }
+    } catch (error) {
+        if (error.name === "AbortError") return;
+        console.error("Hospital search failed.", error);
+        treatmentSaveStatus.textContent = error.message;
+        hideHospitalSuggestions();
+    }
 }
 
 document.getElementById("currentDate").textContent = new Intl.DateTimeFormat(
@@ -203,6 +313,9 @@ function openInfoPage() {
 }
 
 function closeTreatmentPage() {
+    clearTimeout(hospitalSearchTimer);
+    hospitalSearchController?.abort();
+    hideHospitalSuggestions();
     treatmentPage.hidden = true;
     document.getElementById("treatmentInfoBtn").focus();
 }
@@ -333,6 +446,44 @@ treatmentForm.addEventListener("submit", event => {
     fillTreatmentForm(savedTreatment);
     updateTreatmentDirections(savedTreatment);
     treatmentSaveStatus.textContent = "Treatment information saved in this browser.";
+});
+
+treatmentLocationInput.addEventListener("input", () => {
+    const query = treatmentLocationInput.value.trim();
+    treatmentPlaceIdInput.value = "";
+    treatmentSaveStatus.textContent = "";
+    clearTimeout(hospitalSearchTimer);
+
+    if (query.length < 3) {
+        hospitalSearchController?.abort();
+        hideHospitalSuggestions();
+        return;
+    }
+
+    hospitalSearchTimer = setTimeout(() => searchHospitals(query), 350);
+});
+
+treatmentLocationInput.addEventListener("keydown", event => {
+    if (hospitalSuggestions.hidden) return;
+
+    if (event.key === "ArrowDown") {
+        event.preventDefault();
+        setActiveHospitalSuggestion(activeHospitalSuggestion + 1);
+    } else if (event.key === "ArrowUp") {
+        event.preventDefault();
+        setActiveHospitalSuggestion(activeHospitalSuggestion - 1);
+    } else if (event.key === "Enter" && activeHospitalSuggestion >= 0) {
+        event.preventDefault();
+        selectHospitalSuggestion(currentHospitalSuggestions[activeHospitalSuggestion]);
+    } else if (event.key === "Escape") {
+        event.preventDefault();
+        event.stopPropagation();
+        hideHospitalSuggestions();
+    }
+});
+
+treatmentLocationInput.addEventListener("blur", () => {
+    setTimeout(hideHospitalSuggestions, 150);
 });
 
 updateGreeting(loadProfile());
