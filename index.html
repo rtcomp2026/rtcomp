@@ -228,14 +228,28 @@
 
                 <label class="profileWideField">
                     <span>Hospital Name or Address</span>
-                    <input
-                        id="treatmentLocation"
-                        name="treatmentLocation"
-                        type="search"
-                        autocomplete="street-address"
-                        placeholder="For example, Memorial Hospital, Lincoln, NE"
-                        required
-                    >
+                    <div class="hospitalSearch">
+                        <input
+                            id="treatmentLocation"
+                            name="treatmentLocation"
+                            type="search"
+                            autocomplete="off"
+                            placeholder="Start typing a hospital name"
+                            role="combobox"
+                            aria-autocomplete="list"
+                            aria-controls="hospitalSuggestions"
+                            aria-expanded="false"
+                            required
+                        >
+                        <input id="treatmentPlaceId" name="treatmentPlaceId" type="hidden">
+                        <ul
+                            id="hospitalSuggestions"
+                            class="hospitalSuggestions"
+                            role="listbox"
+                            aria-label="Hospital suggestions"
+                            hidden
+                        ></ul>
+                    </div>
                 </label>
 
                 <div class="mapActions profileWideField">
@@ -245,7 +259,7 @@
                         target="_blank"
                         rel="noopener noreferrer"
                     >Search hospitals on Google Maps</a>
-                    <p>Find the hospital in Google Maps, then enter its name or address above.</p>
+                    <p>Type at least three letters to see Google hospital suggestions, or search Google Maps directly.</p>
                 </div>
 
                 <div class="profileActions profileWideField">
