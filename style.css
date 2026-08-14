@@ -264,6 +264,12 @@ button:disabled {
     font-size: 22px;
 }
 
+.pageHeaderActions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
 .remindersContent {
     width: min(760px, calc(100% - 32px));
     margin: 0 auto;
@@ -578,6 +584,15 @@ button:disabled {
     .pageHeader {
         min-height: 56px;
         padding: 0 12px 0 16px;
+    }
+
+    .pageHeaderActions {
+        gap: 6px;
+    }
+
+    .pageHeaderActions .primaryButton {
+        padding: 9px 10px;
+        font-size: 14px;
     }
 
     .dashboardIntro {
