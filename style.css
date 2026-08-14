@@ -446,6 +446,52 @@ button:disabled {
     gap: 14px;
 }
 
+.hospitalSearch {
+    position: relative;
+}
+
+.hospitalSuggestions {
+    position: absolute;
+    inset: calc(100% + 4px) 0 auto;
+    z-index: 5;
+    max-height: 260px;
+    margin: 0;
+    padding: 5px;
+    overflow-y: auto;
+    border: 1px solid #c5c5d2;
+    border-radius: 9px;
+    background: white;
+    box-shadow: 0 10px 25px rgb(0 0 0 / 14%);
+    list-style: none;
+}
+
+.hospitalSuggestions[hidden] {
+    display: none;
+}
+
+.hospitalSuggestion {
+    width: 100%;
+    padding: 11px 12px;
+    border: 0;
+    color: #374151;
+    background: white;
+    font-size: 14px;
+    line-height: 1.35;
+    text-align: left;
+}
+
+.hospitalSuggestion:hover,
+.hospitalSuggestion.active {
+    color: #134e4a;
+    background: #eef8f5;
+}
+
+.hospitalSuggestionMessage {
+    padding: 11px 12px;
+    color: #6b7280;
+    font-size: 14px;
+}
+
 .mapActions p {
     margin: 0;
     color: #6b7280;
