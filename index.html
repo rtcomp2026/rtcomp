@@ -18,6 +18,9 @@
             <button id="newReminderBtn" class="menuItem">➕ New Reminder</button>
             <button id="listReminderBtn" class="menuItem">📅 All Reminders</button>
             <button id="personBtn" class="menuItem">👤 Info</button>
+            <button id="treatmentInfoBtn" class="menuItem">🏥 Treatment Information</button>
+            <button id="treatmentJourneyBtn" class="menuItem">🧭 Treatment Journey</button>
+            <button id="informationDatabaseBtn" class="menuItem">📚 Information Database</button>
         </nav>
     </aside>
 
@@ -177,6 +180,138 @@
             <p class="profilePrivacyNotice">
                 This information is stored as JSON only in this browser. Avoid saving sensitive medical or financial information on a shared device.
             </p>
+        </div>
+    </section>
+
+    <section
+        id="treatmentPage"
+        class="remindersPage"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="treatmentTitle"
+        hidden
+    >
+        <div class="pageHeader">
+            <h2 id="treatmentTitle">Treatment Information</h2>
+            <button id="closeTreatmentBtn" class="iconButton" aria-label="Close treatment information">✕</button>
+        </div>
+
+        <div class="profileContent">
+            <form id="treatmentForm" class="profileForm treatmentForm">
+                <div class="profileSectionHeading profileWideField">
+                    <h3>Your Treatment</h3>
+                    <p>Save the treatment type, starting date and time, and hospital location.</p>
+                </div>
+
+                <label class="profileWideField">
+                    <span>Treatment Type</span>
+                    <select id="treatmentType" name="treatmentType" required>
+                        <option value="">Choose a treatment type</option>
+                        <option value="Radiation therapy">Radiation therapy</option>
+                        <option value="Surgery">Surgery</option>
+                        <option value="Hormone therapy">Hormone therapy</option>
+                        <option value="Chemotherapy">Chemotherapy</option>
+                        <option value="Immunotherapy">Immunotherapy</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </label>
+
+                <label>
+                    <span>Treatment Start Date</span>
+                    <input id="treatmentStartDate" name="treatmentStartDate" type="date" required>
+                </label>
+
+                <label>
+                    <span>Treatment Start Time</span>
+                    <input id="treatmentStartTime" name="treatmentStartTime" type="time" step="300" required>
+                </label>
+
+                <label class="profileWideField">
+                    <span>Hospital Name or Address</span>
+                    <input
+                        id="treatmentLocation"
+                        name="treatmentLocation"
+                        type="search"
+                        autocomplete="street-address"
+                        placeholder="For example, Memorial Hospital, Lincoln, NE"
+                        required
+                    >
+                </label>
+
+                <div class="mapActions profileWideField">
+                    <a
+                        class="secondaryLink"
+                        href="https://www.google.com/maps/search/?api=1&amp;query=hospitals%20near%20me"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >Search hospitals on Google Maps</a>
+                    <p>Find the hospital in Google Maps, then enter its name or address above.</p>
+                </div>
+
+                <div class="profileActions profileWideField">
+                    <p id="treatmentSaveStatus" class="profileSaveStatus" role="status"></p>
+                    <button type="submit" class="primaryButton">Save Treatment</button>
+                </div>
+            </form>
+
+            <a
+                id="treatmentDirectionsLink"
+                class="directionsCard"
+                href="#"
+                target="_blank"
+                rel="noopener noreferrer"
+                hidden
+            >
+                <span>
+                    <strong id="savedTreatmentLocation">Saved hospital</strong>
+                    <small>Open directions in Google Maps</small>
+                </span>
+                <span aria-hidden="true">Directions →</span>
+            </a>
+
+            <p class="profilePrivacyNotice">
+                Treatment information is stored only in this browser. Google Maps opens in a separate tab or app.
+            </p>
+        </div>
+    </section>
+
+    <section
+        id="treatmentJourneyPage"
+        class="remindersPage"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="treatmentJourneyTitle"
+        hidden
+    >
+        <div class="pageHeader">
+            <h2 id="treatmentJourneyTitle">Treatment Journey</h2>
+            <button id="closeTreatmentJourneyBtn" class="iconButton" aria-label="Close treatment journey">✕</button>
+        </div>
+        <div class="remindersContent">
+            <div class="placeholderPageCard">
+                <h3>Your treatment timeline will appear here.</h3>
+                <p>This page is ready for future appointments, milestones, notes, and treatment progress.</p>
+            </div>
+        </div>
+    </section>
+
+    <section
+        id="informationDatabasePage"
+        class="remindersPage"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="informationDatabaseTitle"
+        hidden
+    >
+        <div class="pageHeader">
+            <h2 id="informationDatabaseTitle">Information Database</h2>
+            <button id="closeInformationDatabaseBtn" class="iconButton" aria-label="Close information database">✕</button>
+        </div>
+        <div class="remindersContent">
+            <div class="placeholderPageCard">
+                <h3>Your information library will appear here.</h3>
+                <p>This page is ready for future treatment resources, educational articles, and saved information.</p>
+            </div>
         </div>
     </section>
 
