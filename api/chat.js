@@ -1,4 +1,4 @@
-const GEMINI_MODEL = "gemini-2.5-flash";
+const GEMINI_MODEL = "gemini-3.6-flash";
 const MAX_MESSAGE_LENGTH = 8000;
 
 function json(data, status = 200) {
