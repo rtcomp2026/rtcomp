@@ -202,31 +202,26 @@
             <form id="treatmentForm" class="profileForm treatmentForm">
                 <div class="profileSectionHeading profileWideField">
                     <h3>Your Treatment</h3>
-                    <p>Save the treatment type, starting date and time, and hospital location.</p>
+                    <p>Save the treatment type, individual appointment dates and times, and hospital location.</p>
                 </div>
 
                 <label class="profileWideField">
                     <span>Treatment Type</span>
                     <select id="treatmentType" name="treatmentType" required>
-                        <option value="">Choose a treatment type</option>
-                        <option value="Radiation therapy">Radiation therapy</option>
-                        <option value="Surgery">Surgery</option>
-                        <option value="Hormone therapy">Hormone therapy</option>
-                        <option value="Chemotherapy">Chemotherapy</option>
-                        <option value="Immunotherapy">Immunotherapy</option>
-                        <option value="Other">Other</option>
+                        <option value="">Choose a treatment from Information Database</option>
                     </select>
                 </label>
 
-                <label>
-                    <span>Treatment Start Date</span>
-                    <input id="treatmentStartDate" name="treatmentStartDate" type="date" required>
-                </label>
-
-                <label>
-                    <span>Treatment Start Time</span>
-                    <input id="treatmentStartTime" name="treatmentStartTime" type="time" step="300" required>
-                </label>
+                <section class="fractionCalendar profileWideField" aria-labelledby="treatmentCalendarTitle">
+                    <div class="fractionCalendarHeader">
+                        <div>
+                            <h3 id="treatmentCalendarTitle">Your Treatment Dates and Times</h3>
+                            <p>Six appointments are created 24 hours apart. Every date and time can be edited.</p>
+                        </div>
+                        <button id="addTreatmentAppointmentBtn" type="button" class="secondaryButton">＋ Add Treatment Date</button>
+                    </div>
+                    <div id="treatmentScheduleList" class="fractionScheduleList"></div>
+                </section>
 
                 <label class="profileWideField">
                     <span>Hospital Name or Address</span>
@@ -296,6 +291,23 @@
                 <span aria-hidden="true">Directions →</span>
             </a>
 
+            <a id="treatmentPhoneLink" class="directionsCard" href="#" hidden>
+                <span>
+                    <strong id="savedTreatmentPhone">Saved hospital phone number</strong>
+                    <small>Call the hospital office</small>
+                </span>
+                <span aria-hidden="true">Call →</span>
+            </a>
+
+            <dialog id="callConfirmationDialog" class="callConfirmationDialog" aria-labelledby="callConfirmationTitle">
+                <h3 id="callConfirmationTitle">Call this hospital?</h3>
+                <p>Would you like to call <strong id="callConfirmationNumber"></strong>?</p>
+                <div class="callConfirmationActions">
+                    <button id="cancelHospitalCallBtn" type="button" class="secondaryButton">Cancel</button>
+                    <a id="confirmHospitalCallLink" class="primaryButton" href="#">Call</a>
+                </div>
+            </dialog>
+
             <p class="profilePrivacyNotice">
                 Treatment information is stored only in this browser. Google Maps opens in a separate tab or app.
             </p>
@@ -315,9 +327,28 @@
             <button id="closeTreatmentJourneyBtn" class="iconButton" aria-label="Close treatment journey">✕</button>
         </div>
         <div class="remindersContent">
-            <div class="placeholderPageCard">
+            <div id="journeyEmptyState" class="placeholderPageCard">
                 <h3>Your treatment timeline will appear here.</h3>
-                <p>This page is ready for future appointments, milestones, notes, and treatment progress.</p>
+                <p>Select a treatment and add its individual appointment dates and times in Treatment Information.</p>
+            </div>
+
+            <div id="journeyPlanContent" hidden>
+                <div class="journeySummaryGrid">
+                    <article class="journeySummaryCard">
+                        <h3>Treatment Schedule</h3>
+                        <p id="journeyScheduleSummary"></p>
+                    </article>
+                    <article class="journeySummaryCard">
+                        <h3>Expected Symptoms</h3>
+                        <p id="journeySymptoms"></p>
+                    </article>
+                    <article class="journeySummaryCard">
+                        <h3>Visit Preparation</h3>
+                        <p id="journeyPreparation"></p>
+                    </article>
+                </div>
+                <h3 class="timelineHeading">Fraction and Visit Timeline</h3>
+                <ol id="journeyTimeline" class="journeyTimeline"></ol>
             </div>
         </div>
     </section>
@@ -334,11 +365,89 @@
             <h2 id="informationDatabaseTitle">Information Database</h2>
             <button id="closeInformationDatabaseBtn" class="iconButton" aria-label="Close information database">✕</button>
         </div>
-        <div class="remindersContent">
-            <div class="placeholderPageCard">
-                <h3>Your information library will appear here.</h3>
-                <p>This page is ready for future treatment resources, educational articles, and saved information.</p>
-            </div>
+        <div class="profileContent">
+            <form id="treatmentPlanForm" class="profileForm">
+                <div class="profileSectionHeading profileWideField">
+                    <h3>Expert Treatment Library</h3>
+                    <p>Create reusable expert information for each treatment type. Home and Treatment Journey match the patient's selected treatment name to this database.</p>
+                </div>
+
+                <div class="databaseTreatmentPicker profileWideField">
+                    <label>
+                        <span>Treatments in this database</span>
+                        <select id="expertTreatmentSelect" aria-label="Choose a treatment from the information database">
+                            <option value="">No treatments saved yet</option>
+                        </select>
+                    </label>
+                    <button id="newExpertTreatmentBtn" type="button" class="secondaryButton">Create New Treatment</button>
+                </div>
+
+                <label class="profileWideField">
+                    <span>Treatment Name</span>
+                    <input id="expertTreatmentName" name="treatmentName" type="text" maxlength="150" placeholder="For example, Prostate IMRT" required>
+                </label>
+
+                <label class="profileWideField">
+                    <span>Treatment Overview</span>
+                    <textarea name="overview" rows="4" placeholder="Describe what this treatment is and how it is normally used"></textarea>
+                </label>
+
+                <label>
+                    <span>Number of Fractions</span>
+                    <input name="totalFractions" type="number" min="1" max="100" step="1" placeholder="For example, 20" required>
+                </label>
+
+                <label>
+                    <span>Dose for Each Fraction</span>
+                    <div class="doseFields">
+                        <input name="dosePerFraction" type="number" min="0" step="0.01" placeholder="For example, 2.0" required>
+                        <select name="doseUnit" aria-label="Dose unit"><option value="Gy">Gy</option><option value="cGy">cGy</option><option value="mg">mg</option><option value="Other">Other</option></select>
+                    </div>
+                </label>
+
+                <label class="profileWideField">
+                    <span>What to Do Before a Fraction</span>
+                    <textarea name="preparationBeforeFraction" rows="4" placeholder="For example, drink water, get rest, or bring medication records" required></textarea>
+                </label>
+
+                <label class="profileWideField">
+                    <span>Expected Symptoms After One Fraction</span>
+                    <textarea name="symptomsAfterFraction" rows="4" placeholder="For example, fatigue, tenderness, or temporary discomfort" required></textarea>
+                </label>
+
+                <div class="profileActions profileWideField">
+                    <p id="treatmentPlanSaveStatus" class="profileSaveStatus" role="status"></p>
+                    <button id="updateExpertTreatmentBtn" type="button" class="primaryButton">Update Current Treatment</button>
+                </div>
+            </form>
+
+            <section class="dataFilePanel" aria-labelledby="dataFilesTitle">
+                <div>
+                    <h3 id="dataFilesTitle">Local Data Files</h3>
+                    <p>Save or restore the Information Database separately from the rest of the user's information. Loading a file replaces the corresponding information currently in this browser.</p>
+                </div>
+                <div class="dataFileButtons">
+                    <button id="saveExpertDbFileBtn" type="button" class="secondaryButton">
+                        Save expertdb.json
+                    </button>
+                    <button id="loadExpertDbFileBtn" type="button" class="secondaryButton">
+                        Load expertdb.json
+                    </button>
+                    <button id="saveUserDataFileBtn" type="button" class="secondaryButton">
+                        Save user_data.json
+                    </button>
+                    <button id="loadUserDataFileBtn" type="button" class="secondaryButton">
+                        Load user_data.json
+                    </button>
+                    <input id="expertDbFileInput" class="hiddenFileInput" type="file" accept="application/json,.json">
+                    <input id="userDataFileInput" class="hiddenFileInput" type="file" accept="application/json,.json">
+                </div>
+                <p id="dataFileSaveStatus" class="profileSaveStatus" role="status"></p>
+            </section>
+
+            <p class="profilePrivacyNotice">
+                These files may contain sensitive personal or health information. Save them only in a private location on the user's computer.
+            </p>
         </div>
     </section>
 
@@ -396,7 +505,7 @@
             </div>
 
             <p class="healthNotice">
-                Placeholder only — future health messages should be reviewed by a qualified healthcare professional.
+                Schedule and health guidance are user-entered and should be confirmed with a qualified healthcare professional.
             </p>
         </section>
 
@@ -408,6 +517,6 @@
         </div>
     </main>
 
-    <script type="module" src="app.js"></script>
+    <script type="module" src="app.js?v=20260824-6"></script>
 </body>
 </html>
