@@ -25,6 +25,7 @@ const callConfirmationDialog = document.getElementById("callConfirmationDialog")
 const confirmHospitalCallLink = document.getElementById("confirmHospitalCallLink");
 const treatmentLocationInput = document.getElementById("treatmentLocation");
 const treatmentPlaceIdInput = document.getElementById("treatmentPlaceId");
+const treatmentOfficeNumberInput = document.getElementById("treatmentOfficeNumber");
 const hospitalSuggestions = document.getElementById("hospitalSuggestions");
 const treatmentJourneyPage = document.getElementById("treatmentJourneyPage");
 const informationDatabasePage = document.getElementById("informationDatabasePage");
@@ -885,6 +886,25 @@ function fillTreatmentForm(treatment) {
         treatment.treatmentStartDate,
         treatment.treatmentStartTime
     );
+    validateHospitalPhone();
+}
+
+function normalizeHospitalPhone(phoneNumber) {
+    const digits = String(phoneNumber || "").replace(/\D/g, "");
+    if (digits.length === 10) return digits;
+    if (digits.length === 11 && digits.startsWith("1")) return `+${digits}`;
+    return "";
+}
+
+function validateHospitalPhone() {
+    const phoneNumber = treatmentOfficeNumberInput.value.trim();
+    const isValid = !phoneNumber || Boolean(normalizeHospitalPhone(phoneNumber));
+    treatmentOfficeNumberInput.setCustomValidity(
+        isValid
+            ? ""
+            : "Enter a 10-digit phone number, or 11 digits beginning with 1. Any formatting is allowed."
+    );
+    return isValid;
 }
 
 function updateTreatmentDirections(treatment) {
@@ -901,7 +921,7 @@ function updateTreatmentDirections(treatment) {
     }
 
     const phoneNumber = treatment.treatmentOfficeNumber.trim();
-    const callableNumber = phoneNumber.replace(/[^\d+*#,;]/g, "");
+    const callableNumber = normalizeHospitalPhone(phoneNumber);
     treatmentPhoneLink.hidden = !callableNumber;
     if (callableNumber) {
         document.getElementById("savedTreatmentPhone").textContent = phoneNumber;
@@ -1246,6 +1266,10 @@ diseaseForm.addEventListener("submit", event => {
 
 treatmentForm.addEventListener("submit", event => {
     event.preventDefault();
+    if (!validateHospitalPhone()) {
+        treatmentOfficeNumberInput.reportValidity();
+        return;
+    }
     if (!treatmentCalendarIsValid()) return;
     const treatmentData = Object.fromEntries(new FormData(treatmentForm));
     const treatmentSchedule = collectTreatmentSchedule();
@@ -1269,6 +1293,8 @@ treatmentForm.addEventListener("submit", event => {
     treatmentSaveStatus.textContent =
         "Treatment information saved. Appointments were added to the home screen and Reminders.";
 });
+
+treatmentOfficeNumberInput.addEventListener("input", validateHospitalPhone);
 
 treatmentPhoneLink.addEventListener("click", event => {
     event.preventDefault();
