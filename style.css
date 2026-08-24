@@ -122,6 +122,34 @@ main {
     line-height: 1.4;
 }
 
+.dashboardPrimaryText {
+    margin: 0;
+}
+
+.dashboardTreatmentTypes {
+    margin-bottom: 6px;
+    color: #374151;
+    font-weight: 700;
+}
+
+.dashboardAppointmentList {
+    display: grid;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.dashboardAppointmentList li {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.dashboardAppointmentList strong {
+    color: #374151;
+}
+
 .healthNotice {
     margin: 10px 2px 0;
     color: #6b7280;
@@ -366,6 +394,11 @@ button:disabled {
     resize: vertical;
 }
 
+.profileForm input[readonly] {
+    color: #4b5563;
+    background: #f3f4f6;
+}
+
 .choiceGroup {
     margin: 0;
     padding: 14px;
@@ -399,10 +432,100 @@ button:disabled {
     font-size: 14px;
 }
 
-.choiceOptions input[type="radio"] {
+.choiceOptions input[type="radio"],
+.choiceOptions input[type="checkbox"] {
     width: auto;
     margin: 0;
     accent-color: #0f766e;
+}
+
+.treatmentQuestionPanel {
+    padding: 16px;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    background: #f8fafc;
+}
+
+.treatmentQuestionPanel[hidden] {
+    display: none;
+}
+
+.treatmentQuestionPanel .profileSectionHeading {
+    margin-bottom: 12px;
+}
+
+.treatmentQuestionGrid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.databaseTreatmentPicker {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: end;
+    gap: 12px;
+    padding: 14px;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    background: #f8fafc;
+}
+
+.doseFields {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 90px;
+    gap: 8px;
+}
+
+.fractionCalendar {
+    padding: 16px;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    background: #f8fafc;
+}
+
+.fractionCalendarHeader {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 14px;
+    margin-bottom: 14px;
+}
+
+.fractionCalendarHeader h3,
+.fractionCalendarHeader p {
+    margin: 0;
+}
+
+.fractionCalendarHeader p {
+    margin-top: 4px;
+    color: #6b7280;
+    font-size: 14px;
+}
+
+.fractionScheduleList {
+    display: grid;
+    gap: 10px;
+}
+
+.fractionAppointmentRow {
+    display: grid;
+    grid-template-columns: 92px minmax(150px, 1fr) minmax(120px, 180px) auto;
+    align-items: end;
+    gap: 10px;
+}
+
+.fractionAppointmentNumber {
+    align-self: center;
+    color: #374151;
+    font-weight: 700;
+}
+
+.removeFractionButton {
+    min-height: 42px;
+    color: #991b1b;
+    border-color: #fecaca;
+    background: #fff;
 }
 
 .profileForm input:focus,
@@ -444,6 +567,49 @@ button:disabled {
     color: #6b7280;
     font-size: 12px;
     line-height: 1.5;
+}
+
+.dataFilePanel {
+    display: grid;
+    gap: 14px;
+    margin-top: 18px;
+    padding: 20px 22px;
+    border: 1px solid #d9d9e3;
+    border-radius: 12px;
+    background: white;
+}
+
+.dataFilePanel h3 {
+    margin: 0 0 5px;
+    color: #24443f;
+    font-size: 18px;
+}
+
+.dataFilePanel p {
+    margin: 0;
+    color: #6b7280;
+    font-size: 13px;
+    line-height: 1.45;
+}
+
+.dataFileButtons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.hiddenFileInput {
+    display: none;
+}
+
+.secondaryButton {
+    color: #0f766e;
+    border-color: #0f766e;
+    font-weight: 700;
+}
+
+.secondaryButton:hover {
+    background: #eef8f5;
 }
 
 .mapActions {
@@ -552,6 +718,36 @@ button:disabled {
     background: #ddf5ee;
 }
 
+.callConfirmationDialog {
+    width: min(420px, calc(100% - 32px));
+    padding: 22px;
+    border: 0;
+    border-radius: 14px;
+    box-shadow: 0 20px 55px rgb(15 23 42 / 25%);
+}
+
+.callConfirmationDialog::backdrop {
+    background: rgb(15 23 42 / 45%);
+}
+
+.callConfirmationDialog h3,
+.callConfirmationDialog p {
+    margin-top: 0;
+}
+
+.callConfirmationActions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.callConfirmationActions a {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+}
+
 .placeholderPageCard {
     padding: 24px;
     border: 1px solid #d9d9e3;
@@ -568,6 +764,96 @@ button:disabled {
     margin: 0;
     color: #6b7280;
     line-height: 1.5;
+}
+
+.journeySummaryGrid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.journeySummaryCard {
+    padding: 17px;
+    border: 1px solid #d9d9e3;
+    border-radius: 11px;
+    background: white;
+}
+
+.journeySummaryCard h3 {
+    margin: 0 0 8px;
+    color: #24443f;
+    font-size: 15px;
+}
+
+.journeySummaryCard p {
+    margin: 0;
+    color: #5f6671;
+    font-size: 14px;
+    line-height: 1.5;
+    white-space: pre-wrap;
+}
+
+.timelineHeading {
+    margin: 26px 0 12px;
+    color: #24443f;
+    font-size: 18px;
+}
+
+.journeyTimeline {
+    display: grid;
+    gap: 10px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.journeyTimeline li {
+    display: grid;
+    grid-template-columns: 38px 1fr;
+    align-items: center;
+    gap: 12px;
+    padding: 13px 15px;
+    border: 1px solid #d9d9e3;
+    border-radius: 10px;
+    background: white;
+}
+
+.journeyTimeline li.today {
+    border-color: #0f766e;
+    background: #eefbf7;
+}
+
+.journeyTimeline li.completed {
+    opacity: 0.68;
+}
+
+.timelineMarker {
+    display: grid;
+    place-items: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    color: white;
+    background: #0f766e;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.journeyTimeline li > div {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.journeyTimeline li strong {
+    color: #374151;
+    font-size: 14px;
+}
+
+.journeyTimeline li div span {
+    color: #6b7280;
+    font-size: 13px;
+    line-height: 1.4;
 }
 
 @media (max-width: 600px) {
@@ -633,8 +919,34 @@ button:disabled {
         flex-direction: column;
     }
 
+    .dataFileButtons {
+        flex-direction: column;
+    }
+
     .choiceOptions,
     .choiceOptions.compactChoices {
+        grid-template-columns: 1fr;
+    }
+
+    .treatmentQuestionGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .databaseTreatmentPicker,
+    .doseFields {
+        grid-template-columns: 1fr;
+    }
+
+    .fractionCalendarHeader {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .fractionAppointmentRow {
+        grid-template-columns: 1fr;
+    }
+
+    .journeySummaryGrid {
         grid-template-columns: 1fr;
     }
 }
